@@ -13,3 +13,6 @@ Lung cancer ranks as the primary contributor to cancer-related fatalities. The s
 
 NVIDIA GPU (NVIDIA RTX 6000)
 Python (3.7.0), OpenCV (3.4.0), Openslide-python (1.1.1) and Pytorch (1.5.0) 
+**Results**
+
+![image12A](https://github.com/user-attachments/assets/464d8048-c482-4102-b20a-7e370ef8c8ea)
