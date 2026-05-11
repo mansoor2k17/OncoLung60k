@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oncolung60k"
+version = "1.0.0"
+description = "Modified ConvNeXt and OncoLung60K Dataset for Lung Cancer Histopathology Classification"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Mansoor Ahmad", email = "mansoor.ahmad@students.uettaxila.edu.pk"},
+    {name = "Gulistan Raja", email = "gulistan.raja@uettaxila.edu.pk"},
+]
+keywords = ["lung cancer", "histopathology", "deep learning", "ConvNeXt", "medical imaging"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[project.urls]
+"Homepage" = "https://github.com/mansoor2k17/OncoLung60k"
+"Dataset" = "https://zenodo.org/records/14995223"
+"Bug Tracker" = "https://github.com/mansoor2k17/OncoLung60k/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --tb=short"

@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data (NEVER commit raw data)
+data/
+*.h5
+*.hdf5
+*.tar
+*.tar.gz
+*.zip
+*.pt
+*.pth
+*.ckpt
+
+# Model weights
+checkpoints/
+weights/
+*.bin
+*.safetensors
+
+# Run outputs
+runs/
+logs/
+wandb/
+mlruns/
+outputs/
+gradcam_outputs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sensitive
+.secret
+*.key
+*.pem
+
+# Large files
+*.csv.gz
+*.parquet
+
+# But DO commit these CSVs (split files):
+!splits/*.csv

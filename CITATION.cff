@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this software or dataset, please cite it as below."
+title: "Modified ConvNeXt and OncoLung60K Dataset for Lung Cancer Diagnosis"
+authors:
+  - family-names: Ahmad
+    given-names: Mansoor
+    affiliation: "University of Engineering and Technology, Taxila"
+    email: mansoor.ahmad@students.uettaxila.edu.pk
+    orcid: "https://orcid.org/0009-0001-8035-2086"
+  - family-names: Raja
+    given-names: Gulistan
+    affiliation: "University of Engineering and Technology, Taxila"
+    email: gulistan.raja@uettaxila.edu.pk
+    orcid: "https://orcid.org/0000-0003-2026-1219"
+version: 1.0.0
+date-released: "2025-08-01"
+license: MIT
+repository-code: "https://github.com/mansoor2k17/OncoLung60k"
+url: "https://zenodo.org/records/14995223"
+keywords:
+  - lung cancer
+  - histopathology
+  - deep learning
+  - ConvNeXt
+  - medical imaging
+  - computational pathology
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Ahmad
+      given-names: Mansoor
+    - family-names: Raja
+      given-names: Gulistan
+  title: "Leveraging the Modified ConvNeXt Model and OncoLung60K Dataset for Lung Cancer Diagnosis"
+  journal: "Journal of Intelligent & Fuzzy Systems"
+  year: 2026
+  notes: "Manuscript ID: IFS-26-0249"

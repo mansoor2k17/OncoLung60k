@@ -1,0 +1,25 @@
+# Modified ConvNeXt on LungHist700 (cross-dataset benchmark)
+model:
+  name: modified_convnext
+  pretrained: true
+  use_msp: true
+  use_ce: true
+  use_ff: true
+
+splits_csv: splits/lunghist700_5fold.csv
+num_classes: 7  # well/moderately/poorly differentiated x ACA/SCC + Normal
+class_names: [ACA_well, ACA_mod, ACA_poor, SCC_well, SCC_mod, SCC_poor, Normal]
+image_size: 256
+
+seed: 42
+epochs: 100
+batch_size: 16   # smaller dataset, smaller batch
+num_workers: 4
+amp: true
+test_fold: 0
+
+lr: 1.0e-4
+min_lr: 1.0e-6
+weight_decay: 1.0e-3
+label_smoothing: 0.1
+early_stop_patience: 15
