@@ -319,16 +319,6 @@ If you use this code, model, or dataset, please cite:
   note = {Manuscript ID: IFS-26-0249}
 }
 
-@dataset{Ahmad2025OncoLung60K,
-  author = {Ahmad, Mansoor and Raja, Gulistan},
-  title = {OncoLung60K: A Large-Scale Histopathological Image Dataset for Lung Cancer Subtype Classification},
-  year = {2025},
-  publisher = {Zenodo},
-  doi = {10.5281/zenodo.14995223},
-  url = {https://zenodo.org/records/14995223}
-}
-```
-
 ---
 
 ## License
