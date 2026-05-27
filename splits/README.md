@@ -8,10 +8,10 @@ This directory contains the CSV files used for patient-wise stratified 5-fold cr
 
 The proposed Modified ConvNeXt replaces every block of the four-stage ConvNeXt backbone with an Enhanced ConvNeXt Block (ECB) that adds a multi-scale pooling and contrast-aware fusion path on top of the depthwise-convolution stream.
 
-![Overall Modified ConvNeXt architecture](../assets/figures/fig01_architecture.png)
+![Overall Modified ConvNeXt architecture]
 *Overall architecture of the Modified ConvNeXt. The four hierarchical stages (S1–S4) progressively halve spatial resolution while doubling channel dimensionality; each stage replaces the standard ConvNeXt block with the Enhanced ConvNeXt Block (ECB).*
 
-![ECB vs. baseline block](../assets/figures/fig02_ecb_block.png)
+![ECB vs. baseline block]
 *Side-by-side comparison of the baseline ConvNeXt block (left) and the Enhanced ConvNeXt Block (right). The ECB augments the depthwise-convolution path with parallel max/average pooling, an explicit max − average contrast map, and channel-wise fusion via a 1 × 1 convolution before re-injection into the residual stream.*
 
 For full architectural detail (pooling stride, fusion 1×1, residual paths) see Figure 3 of the paper.
@@ -22,7 +22,7 @@ For full architectural detail (pooling stride, fusion 1×1, residual paths) see 
 
 Patient-wise stratified 5-fold CV on OncoLung60K, with eight modern baselines (CNN, transformer, hybrid):
 
-![Accuracy vs. model size](../assets/figures/fig04_acc_vs_size.png)
+![Accuracy vs. model size]
 *Modified ConvNeXt (red star) achieves the highest mean accuracy across all tested architecture families. Error bars are ±1 std across the 5 patient-wise folds; marker size is proportional to GFLOPs at 256×256 input.*
 
 ---
@@ -37,7 +37,7 @@ Patient-wise stratified 5-fold CV on OncoLung60K, with eight modern baselines (C
 
 The 65 patients are distributed across classes as follows: **Adeno 16, SCC 21, SCLC 12, NC 16**. NC (Normal Control) is the class folder name in the released dataset; throughout the paper this class is referred to as *Normal*.
 
-![Patient demographics](../assets/figures/fig26_demographics.png)
+![Patient demographics]
 *OncoLung60K patient demographics: (a) age distribution (mean 61.2 years, n = 65), (b) sex distribution (65 % male / 35 % female), (c) class distribution per patient (Adeno 16, SCC 21, SCLC 12, Normal 16).*
 
 ---
@@ -122,17 +122,17 @@ OK: No (label, slide_id) appears in more than one fold
 
 ## Per-class clinical metrics (with these splits)
 
-![Per-class sensitivity / specificity / PPV / NPV](../assets/figures/fig22_per_class.png)
+![Per-class sensitivity / specificity / PPV / NPV]
 *Per-class Sensitivity, Specificity, PPV and NPV on OncoLung60K (Modified ConvNeXt under patient-wise 5-fold CV). Sensitivity exceeds 0.90 and specificity exceeds 0.96 for every class.*
 
-![ROC and Precision–Recall curves](../assets/figures/fig20_roc_pr.png)
+![ROC and Precision–Recall curves]
 *Aggregated ROC (one-vs-rest) and Precision–Recall curves. All four classes exceed AUC 0.96 and average precision 0.93.*
 
 ---
 
 ## Explainability sanity check
 
-![Grad-CAM++ heatmaps](../assets/figures/fig23_gradcam.png)
+![Grad-CAM++ heatmaps]
 *Grad-CAM++ visualisations on representative test patches. Heatmaps consistently localise diagnostically relevant cellular regions (nuclear clusters and glandular boundaries in Adeno, keratin pearls in SCC, dense small-cell regions in SCLC). Mean IoU against pathologist-annotated regions on a 200-patch subset: 0.71 ± 0.08.*
 
 ---
