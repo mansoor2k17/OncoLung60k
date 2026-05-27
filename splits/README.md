@@ -87,7 +87,7 @@ Patient-wise CV with whole-slide groups produces uneven folds because individual
 
 The reported `91.4 ± 0.9 %` accuracy is the mean and standard deviation across these folds — the fold variance is already baked into the result.
 
-![5-fold accuracy distribution across nine architectures](../assets/figures/fig21_box_5fold.png)
+[5-fold accuracy distribution across nine architectures]
 *Per-fold accuracy box-plots across nine architectures on OncoLung60K. The Modified ConvNeXt shows both higher mean accuracy and tighter variance than every baseline.*
 
 ---
