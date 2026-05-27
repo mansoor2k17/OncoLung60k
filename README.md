@@ -155,7 +155,7 @@ OncoLung60k/
 
 ## Installation
 
-### Option 1: Pip (recommended for development)
+Pip (recommended for development)
 
 ```bash
 git clone https://github.com/mansoor2k17/OncoLung60k.git
@@ -168,13 +168,6 @@ pip install -r requirements.txt
 Verify installation:
 ```bash
 python -c "from src.models.modified_convnext import ModifiedConvNeXt; print('OK')"
-```
-
-### Option 2: Docker (recommended for reproducibility)
-
-```bash
-docker build -t oncolung60k -f docker/Dockerfile .
-docker run --gpus all -v $(pwd):/workspace -it oncolung60k
 ```
 
 ### System requirements
@@ -302,7 +295,7 @@ python scripts/download_weights.py --output checkpoints/
 ```
 
 Or manually:
-- Fold 0–4 weights: [Zenodo link](https://zenodo.org/records/14995223)
+- Fold 0–4 weights: [Zenodo link](https://zenodo.org/uploads/20410103)
 
 ---
 
