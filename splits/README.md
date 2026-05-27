@@ -1,8 +1,33 @@
 # Patient-Wise Cross-Validation Splits
 
-This directory contains the CSV files used for patient-wise stratified 5-fold cross-validation in the paper. They define the exact patient-to-fold assignment used in all reported experiments; running training with these CSVs reproduces the splits used for the paper's accuracy figures (model outputs may still differ by small amounts depending on GPU, cuDNN, and library versions — see `docs/REPRODUCE.md`).
+This directory contains the CSV files used for patient-wise stratified 5-fold cross-validation in the paper *"Leveraging the Modified ConvNeXt Model and OncoLung60K Dataset for Lung Cancer Diagnosis"*. Use these to reproduce the patient-to-fold assignment used in all reported experiments.
 
-## Files
+---
+
+## Method at a glance
+
+The proposed Modified ConvNeXt replaces every block of the four-stage ConvNeXt backbone with an Enhanced ConvNeXt Block (ECB) that adds a multi-scale pooling and contrast-aware fusion path on top of the depthwise-convolution stream.
+
+![Overall Modified ConvNeXt architecture](../assets/figures/fig01_architecture.png)
+*Overall architecture of the Modified ConvNeXt. The four hierarchical stages (S1–S4) progressively halve spatial resolution while doubling channel dimensionality; each stage replaces the standard ConvNeXt block with the Enhanced ConvNeXt Block (ECB).*
+
+![ECB vs. baseline block](../assets/figures/fig02_ecb_block.png)
+*Side-by-side comparison of the baseline ConvNeXt block (left) and the Enhanced ConvNeXt Block (right). The ECB augments the depthwise-convolution path with parallel max/average pooling, an explicit max − average contrast map, and channel-wise fusion via a 1 × 1 convolution before re-injection into the residual stream.*
+
+For full architectural detail (pooling stride, fusion 1×1, residual paths) see Figure 3 of the paper.
+
+---
+
+## Headline result
+
+Patient-wise stratified 5-fold CV on OncoLung60K, with eight modern baselines (CNN, transformer, hybrid):
+
+![Accuracy vs. model size](../assets/figures/fig04_acc_vs_size.png)
+*Modified ConvNeXt (red star) achieves the highest mean accuracy across all tested architecture families. Error bars are ±1 std across the 5 patient-wise folds; marker size is proportional to GFLOPs at 256×256 input.*
+
+---
+
+## Files in this directory
 
 | File | Rows | Patients | Classes |
 |------|------|----------|---------|
@@ -11,6 +36,11 @@ This directory contains the CSV files used for patient-wise stratified 5-fold cr
 | `lunghist700_5fold.csv` *(planned)* | 691 | 45 | 7 (3 ACA + 3 SCC + Normal) |
 
 The 65 patients are distributed across classes as follows: **Adeno 16, SCC 21, SCLC 12, NC 16**. NC (Normal Control) is the class folder name in the released dataset; throughout the paper this class is referred to as *Normal*.
+
+![Patient demographics](../assets/figures/fig26_demographics.png)
+*OncoLung60K patient demographics: (a) age distribution (mean 61.2 years, n = 65), (b) sex distribution (65 % male / 35 % female), (c) class distribution per patient (Adeno 16, SCC 21, SCLC 12, Normal 16).*
+
+---
 
 ## CSV schemas
 
@@ -41,9 +71,11 @@ patient_id,label,n_tiles,fold
 
 Useful for sanity-checking per-patient image counts.
 
+---
+
 ## Per-fold composition (actual, not idealised)
 
-These are the real counts produced by the generation script — not a uniform 12,000 per fold. Patient-wise CV with whole-slide groups produces uneven folds because individual slides vary enormously in tile count (one SCLC slide alone contributes 9,389 patches).
+Patient-wise CV with whole-slide groups produces uneven folds because individual slides vary enormously in tile count (one SCLC slide alone contributes 9,389 patches). This is intrinsic to the data, not a bug in the split.
 
 | Fold | Patients | Total tiles | Adeno | SCC | SCLC | NC |
 |------|----------|-------------|-------|-----|------|----|
@@ -53,7 +85,12 @@ These are the real counts produced by the generation script — not a uniform 12
 | 3    | 12       | 9,658       | 1,572 | 3,851 | 1,333 | 2,902 |
 | 4    | 7        | 10,906      | 2,734 | 3,836 | 1,418 | 2,918 |
 
-This imbalance is intrinsic to the data, not a bug in the split. The reported `91.4 ± 0.9 %` accuracy in the paper is the mean and standard deviation across these folds, so the fold variance is already baked into the result.
+The reported `91.4 ± 0.9 %` accuracy is the mean and standard deviation across these folds — the fold variance is already baked into the result.
+
+![5-fold accuracy distribution across nine architectures](../assets/figures/fig21_box_5fold.png)
+*Per-fold accuracy box-plots across nine architectures on OncoLung60K. The Modified ConvNeXt shows both higher mean accuracy and tighter variance than every baseline.*
+
+---
 
 ## Verifying no patient leakage
 
@@ -81,6 +118,25 @@ OK: No patient_id appears in more than one fold
 OK: No (label, slide_id) appears in more than one fold
 ```
 
+---
+
+## Per-class clinical metrics (with these splits)
+
+![Per-class sensitivity / specificity / PPV / NPV](../assets/figures/fig22_per_class.png)
+*Per-class Sensitivity, Specificity, PPV and NPV on OncoLung60K (Modified ConvNeXt under patient-wise 5-fold CV). Sensitivity exceeds 0.90 and specificity exceeds 0.96 for every class.*
+
+![ROC and Precision–Recall curves](../assets/figures/fig20_roc_pr.png)
+*Aggregated ROC (one-vs-rest) and Precision–Recall curves. All four classes exceed AUC 0.96 and average precision 0.93.*
+
+---
+
+## Explainability sanity check
+
+![Grad-CAM++ heatmaps](../assets/figures/fig23_gradcam.png)
+*Grad-CAM++ visualisations on representative test patches. Heatmaps consistently localise diagnostically relevant cellular regions (nuclear clusters and glandular boundaries in Adeno, keratin pearls in SCC, dense small-cell regions in SCLC). Mean IoU against pathologist-annotated regions on a 200-patch subset: 0.71 ± 0.08.*
+
+---
+
 ## Regenerating splits
 
 If you want to regenerate splits with a different seed:
@@ -95,6 +151,8 @@ python -m src.utils.splits \
 
 ⚠️ **For paper reproduction, use the provided CSVs.** Re-generating with a different seed produces different folds and slightly different accuracy numbers.
 
+---
+
 ## Generation procedure
 
 The splits were generated as follows:
@@ -104,6 +162,8 @@ The splits were generated as follows:
 3. This guarantees zero patient (and therefore zero slide) overlap between folds.
 
 The generation script is at `scripts/build_splits.py`. Running it from a fresh checkout produces these CSVs byte-for-byte.
+
+---
 
 ## Patient identifiers
 
@@ -118,8 +178,24 @@ replace this comment block with a single sentence such as:
     approval NUMS-IRB-2023-021 from the National University of Medical
     Sciences, Pakistan.
 
-If no such IRB approval exists, leave this comment block deleted and add
-no replacement text. The repository's main README must also be kept
-consistent: do not claim an IRB number anywhere unless it is real and is
-also stated in the manuscript.
+If no such IRB approval exists, delete this comment block entirely. The
+repository's main README must also be kept consistent: do not claim an
+IRB number anywhere unless it is real and is also stated in the
+manuscript.
 -->
+
+---
+
+## Citation
+
+If you use these splits or the OncoLung60K dataset, please cite the paper. BibTeX entry will be added on publication.
+
+```bibtex
+@article{ahmad2026modifiedconvnext,
+  title   = {Leveraging the Modified ConvNeXt Model and OncoLung60K Dataset for Lung Cancer Diagnosis},
+  author  = {Ahmad, Mansoor and Raja, Gulistan},
+  journal = {Journal of Intelligent \& Fuzzy Systems},
+  year    = {2026},
+  note    = {In press}
+}
+```
