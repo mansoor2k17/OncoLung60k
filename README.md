@@ -143,9 +143,6 @@ OncoLung60k/
 │   ├── test_splits.py
 │   └── test_metrics.py
 │
-├── docker/                            # Docker setup
-│   ├── Dockerfile
-│   └── docker-compose.yml
 │
 └── assets/                            # Images for README/docs
     └── ecb_diagram.png
@@ -188,10 +185,10 @@ The OncoLung60K dataset contains 60,000 H&E-stained patches from 65 patients acr
 
 | Class | Patches | Patients |
 |-------|---------|----------|
-| Adenocarcinoma | 15,000 | 22 |
-| Squamous Cell Carcinoma | 15,000 | 19 |
+| Adenocarcinoma | 15,000 | 16 |
+| Squamous Cell Carcinoma | 15,000 | 21 |
 | Small Cell Lung Cancer | 15,000 | 12 |
-| Normal lung tissue | 15,000 | 12 |
+| Normal lung tissue | 15,000 | 16 |
 | **Total** | **60,000** | **65** |
 
 **Resolution**: 512×512 pixels at 20× magnification.
