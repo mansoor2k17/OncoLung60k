@@ -304,10 +304,9 @@ If you use this code, model, or dataset, please cite:
 @article{Ahmad2026OncoLung,
   author = {Ahmad, Mansoor and Raja, Gulistan},
   title = {Leveraging the Modified ConvNeXt Model and OncoLung60K Dataset for Lung Cancer Diagnosis},
-  journal = {Journal of Intelligent \& Fuzzy Systems},
+  journal = {Journal of Avanced Intelligence},
   year = {2026},
-  note = {Manuscript ID: IFS-26-0249}
-}
+ }
 
 ---
 
