@@ -6,7 +6,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.10+-ee4c2c.svg)](https://pytorch.org/)
 [![Dataset DOI](https://img.shields.io/badge/Dataset-Zenodo-blue)](https://zenodo.org/records/14995223)
 
-Official implementation of **"Leveraging the Modified ConvNeXt Model and OncoLung60K Dataset for Lung Cancer Diagnosis"** (under review at *Journal of Intelligent & Fuzzy Systems*, IFS-26-0249).
+Official implementation of **"Leveraging the Modified ConvNeXt Model and OncoLung60K Dataset for Lung Cancer Diagnosis"** (under review at *Journal of Advanced Intelligence*).
 
 This repository contains:
 - **Modified ConvNeXt** model with Enhanced ConvNeXt Block (ECB) for lung cancer subtype classification.
