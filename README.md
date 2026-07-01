@@ -41,13 +41,6 @@ cd OncoLung60k
 # Install dependencies (Python 3.8+, CUDA 11.2+ recommended)
 pip install -r requirements.txt
 
-# OR use Docker for full reproducibility
-docker build -t oncolung60k -f docker/Dockerfile .
-docker run --gpus all -it oncolung60k
-
-# Run a smoke test (5 minutes)
-python scripts/smoke_test.py
-
 # Train Modified ConvNeXt on OncoLung60K
 python -m src.train --config configs/oncolung_modified_convnext.yaml
 
@@ -64,7 +57,7 @@ python -m src.kfold_cv --config configs/oncolung_modified_convnext.yaml
 - **Comprehensive evaluation**: ROC-AUC, sensitivity, specificity, PPV, NPV, per-class F1, paired t-test/Wilcoxon significance with Bonferroni correction.
 - **Explainability**: Grad-CAM, Grad-CAM++, Score-CAM with quantitative IoU evaluation against pathologist ROIs.
 - **8 baseline architectures** for comparison: ResNet50, DenseNet121, EfficientNet-B0, ConvNeXt-Tiny/Small/Base, ViT-B/16, Swin-B.
-- **Full reproducibility**: Pinned dependencies, fixed seeds, frozen Docker image, exact patient-wise CSV splits released.
+- **Full reproducibility**: Pinned dependencies, fixed seeds, exact patient-wise CSV splits released.
 
 ---
 
