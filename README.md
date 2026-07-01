@@ -316,8 +316,6 @@ If you use this code, model, or dataset, please cite:
 - Pathologist Muhammad Asif (National University of Medical Sciences, NUMS) for slide preparation, H&E staining, and annotation.
 - Muhammad Shaban (postdoctoral fellow, Harvard Medical School) for guidance on histopathology research challenges.
 - This work was partially sponsored by NVIDIA (USA) through the RTX 6000 grant under the Applied Research Program.
-- IRB approval: NUMS-IRB-2023-021.
-
 ---
 
 ## Contact
